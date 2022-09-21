@@ -36,19 +36,24 @@ describe('6 - Implemente os casos de teste para a função `productDetails`', ()
   });
     // ESCREVA SEUS TESTES ABAIXO:
     it('Teste se o retorno da função é um array.', () => { 
-      expect(productDetails()).toEqual(array)
+      expect(Array.isArray(productDetails())).toBe(true)
     })
-    
-  
+      
    it('Teste se o array retornado pela função contém dois itens dentro.', () => { 
       expect(productDetails().length).toBe(2)
     })
     // Teste se os dois itens dentro do array retornado pela função são objetos.
     it('Teste se os dois itens dentro do array retornado pela função são objetos.', () => { 
-      expect(productDetails('firstProduct', 'secondProduct')).toBe(object)
+      expect(typeof productDetails()).toBe('object')
     })
     
-    // Teste se quando passado parâmetros diferentes entre si, os dois objetos também são diferentes entre si.
-    // Teste se os dois productIds terminam com 123.
+    it('Teste se quando passado parâmetros diferentes entre si, os dois objetos também são diferentes entre si.', () =>{
+      expect(productDetails('firstProduct', 'secondProduct')[0]).not.toEqual(productDetails('firstProduct', 'secondProduct')[1])
+    })
+
+    it('Teste se os dois productIds terminam com 123.', () => {
+      expect(productDetails('firstProduct', 'secondProduct')[0].details.productId).toMatch('123');
+      expect(productDetails('firstProduct', 'secondProduct')[1].details.productId).toMatch('123');
+    })
   
 });
